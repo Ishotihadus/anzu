@@ -23,10 +23,10 @@ module Anzu
         direct_message_deep_link: direct_message_deep_link,
         for_super_followers_only: for_super_followers_only,
         geo: geo_place_id && { place_id: geo_place_id }.compact,
-        media: media_ids && { media_ids: media_ids, tagged_user_ids: media_tagged_user_ids }.compact,
+        media: media_ids && { media_ids: media_ids.map(&:to_s), tagged_user_ids: media_tagged_user_ids&.map(&:to_s) }.compact,
         poll: poll_options && { duration_minutes: poll_duration_minutes, options: poll_options }.compact,
         quote_tweet_id: quote_tweet_id,
-        reply: in_reply_to_tweet_id && { in_reply_to_tweet_id: in_reply_to_tweet_id, exclude_reply_user_ids: exclude_reply_user_ids }.compact,
+        reply: in_reply_to_tweet_id && { in_reply_to_tweet_id: in_reply_to_tweet_id.to_s, exclude_reply_user_ids: exclude_reply_user_ids&.map(&:to_s) }.compact,
         reply_settings: reply_settings,
         text: text
       }
