@@ -1,31 +1,34 @@
 # Anzu
 
-TODO: Delete this and the text below, and describe your gem
+	人生の質を下げてまで、働く必要ないって。自分のために生きなきゃ
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/anzu`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Twitter API wrapper for Ruby.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+    $ bundle add anzu
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+    $ gem install anzu
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'anzu'
 
-## Development
+client = Anzu::Client.new do |config|
+  config.consumer_key = 'consumer-key'
+  config.consumer_secret = 'consumer-secret'
+  config.access_token = 'access-token'
+  config.access_token_secret = 'access-token-secret'
+end
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+client.create_tweet_v2('tweet from anzu')
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+# License
 
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/anzu.
+This gem is provided under the MIT License.
