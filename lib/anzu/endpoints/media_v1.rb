@@ -15,12 +15,11 @@ module Anzu
     # @param [String | nil] media_category Must be nil, tweet_image, tweet_video, tweet_gif, dm_image, dm_video, dm_gif, or subtitles
     # @param [Array<String>] additional_owners
     def upload_media_v1(bin, mime_type = nil, media_category: nil, additional_owners: nil)
-      unless mime_type
-        file = bin.is_a?(String) ? File.open(bin, 'rb') : bin
-        file.binmode
-        file.rewind
-        bin = file.read
-        mime_type ||= MIME::Types.type_for(file.path).find {|e| e.media_type == 'image' || e.media_type == 'video'}&.content_type
+      unless bin.is_a?(String)
+        mime_type ||= MIME::Types.type_for(bin.path).find {|e| e.media_type == 'image' || e.media_type == 'video'}&.content_type
+        bin.binmode
+        bin.rewind
+        bin = bin.read
       end
 
       unless media_category
